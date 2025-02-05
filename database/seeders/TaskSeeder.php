@@ -79,8 +79,8 @@ class TaskSeeder extends Seeder
                 'list_id' => TaskList::where('name', 'Libur')->first()->id,
             ],
             [
-                'name' => 'Kota Nanas',
-                'description' => 'subang terkenal dengan nanas dan tradisi sisingaan',
+                'name' => 'KFC',
+                'description' => 'ayam nya enak',
                 'is_completed' => false,
                 'priority' => 'high',
                 'list_id' => TaskList::where('name', 'Subang')->first()->id,

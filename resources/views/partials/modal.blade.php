@@ -5,28 +5,29 @@
                 <!--{{ route('lists.store') }} adalah cara di Blade untuk menghasilkan URL untuk rute yang dinamakan 'lists.store'. Ini akan mengarah ke URL yang terkait dengan fungsi untuk menyimpan daftar baru. Biasanya, dalam web aplikasi (seperti aplikasi manajemen tugas), rute ini akan menangani penyimpanan data baru ke dalam basis data.-->
                 <!--@method('POST') adalah sintaks khusus Blade (templating engine dari Laravel) untuk menyimulasikan metode HTTP yang berbeda di formulir.-->
             @csrf
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="addListModalLabel">Tambah List</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header"><!-- bagian penting dalam mendesain modal karena memberi struktur pada bagian atas modal, termasuk tempat untuk judul dan tombol penutupan.-->
+                <h1 class="modal-title fs-5" id="addListModalLabel">Tambah List</h1><!--Berfungsi untuk menampilkan judul modal di bagian header modal, yang dalam hal ini adalah teks "Tambah List"-->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button><!--Berfungsi untuk menampilkan tombol penutupan modal dalam antarmuka pengguna.-->
             </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nama</label>
+            <div class="modal-body"><!--adalah bagian utama di dalam modal yang menampung konten (seperti teks, formulir, atau informasi lainnya).-->
+                <div class="mb-3"><!--adalah kelas utilitas dari Bootstrap yang digunakan untuk menambahkan margin bawah pada elemen, memberikan jarak antara elemen tersebut dan elemen yang ada di bawahnya.-->
+                    <label for="name" class="form-label">Nama</label><!--untuk mendefinisikan label untuk elemen input dalam sebuah form-->
                     <input type="text" class="form-control" id="name" name="name"
-                        placeholder="Masukkan nama list">
+                        placeholder="Masukkan nama list"><!--<input> dengan type="text" digunakan untuk membuat kotak teks di mana pengguna bisa memasukkan informasi berupa teks.
+                        id="name" memberikan identitas unik untuk elemen ini (terkait dengan label).-->
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Tambah</button>
+            <div class="modal-footer"><!--<div class="modal-footer"> mendefinisikan bagian bawah modal yang berisi tombol-tombol kontrol.-->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><!--Tombol "Batal" digunakan untuk menutup modal tanpa mengambil tindakan lebih lanjut, menggunakan data-bs-dismiss="modal"-->
+                <button type="submit" class="btn btn-primary">Tambah</button><!--Tombol "Tambah" digunakan untuk mengirimkan formulir (atau mengambil tindakan lain) ketika pengguna selesai dan ingin menambah data.-->
             </div>
         </form>
     </div>
 </div>
 
 <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="{{ route('tasks.store') }}" method="POST" class="modal-content">
+    <div class="modal-dialog"><!--Berfungsi untuk mendefinisikan struktur utama modal yang berisi konten modal, seperti header, body, dan footer.-->
+        <form action="{{ route('tasks.store') }}" method="POST" class="modal-content"><!--Berfungsi untuk mendefinisikan formulir dalam modal yang akan mengirimkan data ke server untuk menyimpan informasi baru (misalnya, menambahkan tugas baru)-->
             @method('POST')
             @csrf
             <div class="modal-header">

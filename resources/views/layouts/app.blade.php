@@ -6,37 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>{{ $title }} - {{ config('app.name') }}</title>
-     <!--Kelas CSS untuk menandai card yang dipilih -->
-@card.selected {
-        <background-color: #cce5ff;>  /* Mengubah warna latar belakang ketika card dipilih */
-       <border: 2px solid #0056b3;> /* Mengubah warna border */
-    }
-    
-     Kelas CSS untuk card dengan tugas selesai
-    .card.completed {
-        <background-color: #d4edda;  >/* Mengubah warna latar belakang tugas selesai */
-        border: 2px solid #28a745;>
-    }
-    
+    <title>{{ $title ?? 'Default Title' }} - {{ config('app.name') }}</title>
+
+
     <!-- Import bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap-icons/font/bootstrap-icons.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
-<body style="background-image: url('{{asset('bg/bg.gif')}}'); background-size: cover; background-position: center;">
-   <!-- background-image: url('{{asset('bg/bg.gif')}}');
-Ini adalah properti CSS untuk menetapkan gambar latar belakang.-->
-<!--background-size: cover;
-Properti ini mengatur ukuran gambar latar belakang agar selalu menutupi seluruh area elemen (dalam hal ini, elemen <body>).-->
-
+<body>
     @include('partials.navbar') <!-- Mengambil component navbar -->
 
-   
     @yield('content') <!-- Render content -->
 
-
-    @include('partials.modal') <!-- Fungsi ini adalah untuk menggunakan atau menyertakan file view (template) lain di dalam file Blade yang sedang aktif.-->
+    @include('partials.modal')
 
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script> <!-- Import bootstrap JS -->

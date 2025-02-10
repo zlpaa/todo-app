@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(TaskListSeeder::class);
         $this->call(TaskSeeder::class);
+        $this->call(ItemSeeder::class);
     }
 }

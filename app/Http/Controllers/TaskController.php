@@ -51,6 +51,12 @@ class TaskController extends Controller
 
         return redirect()->back();
     }
+    public function edit(Task $task)
+{
+    // Logika untuk menampilkan halaman edit tugas
+    return view('tasks.edit', compact('task'));
+}
+
     public function show($id) {
         $task = Task::findOrFail($id);
 

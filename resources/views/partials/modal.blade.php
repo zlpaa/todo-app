@@ -49,7 +49,7 @@
                     <input type="text" class="form-control" id="description" name="description"
                         placeholder="Masukkan deskripsi"><!--Menyediakan kolom input bagi pengguna untuk mengetikkan deskripsi, dengan petunjuk yang diberikan dalam placeholder. Data yang dimasukkan akan dikirim dengan nama description ketika form disubmit-->
                 </div>
-                <select class="form-select form-select-sm" aria-label="Small select example" id="priority" name="priority"><!--Elemen <select> ini membuat dropdown list yang memungkinkan pengguna memilih satu opsi dari beberapa pilihan yang tersedia.
+                <select class="form-select" aria-label="Small select example" id="priority" name="priority"><!--Elemen <select> ini membuat dropdown list yang memungkinkan pengguna memilih satu opsi dari beberapa pilihan yang tersedia.
                     Kelas Bootstrap memberikan desain yang konsisten dan ukuran yang lebih kecil (dengan form-select-sm), dan atribut aria-label memastikan bahwa elemen ini dapat diakses dengan baik oleh pengguna yang menggunakan pembaca layar.-->
                     <option value="low">low</option>
                     <option value="medium" selected>medium</option>

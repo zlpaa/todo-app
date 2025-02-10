@@ -106,10 +106,10 @@
                                 </div>
                             @endif
                         @endforeach
-                        <button type="button" class="btn btn-sm btn-outline-warningst->id }}">
+                        <button type="button" class="btn btn-sm btn-outline-warningst->id }}" data-bs-toggle="modal" data-bs-target="#addTaskModal" data-list="{{$list->id}}">
                             <span class="d-flex align-items-center justify-content-center">
                                 <i class="bi bi-plus fs-5"></i>
-                                Tambah
+                                Tambah 
                             </span>
                         </button>
                     </div>

@@ -1,23 +1,23 @@
-@extends('layouts.app')<!--fungsinya untuk kamu memberi tahu bahwa halaman yang sedang dibuat akan menggunakan layout yang sudah didefinisikan dalam file app.blade.php sebagai dasar tampilan.-->
+@extends('layouts.app')
 
-@section('content')<!--berfungsi untuk mendefinisikan bagian konten khusus yang ingin kamu tampilkan di tempat yang sesuai di dalam layout yang lebih besar. -->
-<!-- resources/views/home.blade.php -->
-
-<div id="content" class="overflow-y-hidden overflow-x-hidden bg-light p-5">
+@section('content')
+<div id="content" class="overflow-y-hidden overflow-x-hidden bg-gradient p-5">
     <div class="d-flex align-items-center justify-content-center flex-column">
+        <!-- Search Form -->
         <form action="{{ route('home.search') }}" method="GET" 
-              class="d-flex align-items-center gap-2 p-3 bg-white rounded shadow">
+              class="d-flex align-items-center gap-3 p-4 bg-white rounded-lg shadow-lg">
             <input type="text" name="search" placeholder="Cari..." 
-                   class="form-control border-primary" style="width: 300px;">
-            <button type="submit" class="btn btn-warning">Cari</button>
+                   class="form-control border-0 shadow-sm rounded-pill p-3"
+                   style="width: 300px;">
+            <button type="submit" class="btn btn-primary rounded-pill px-4 py-2 shadow-sm">Cari</button>
         </form>
 
-        <!-- Tampilkan hasil pencarian jika ada -->
+        <!-- Display search results -->
         @if(isset($results))
-            <h3 class="text-success mt-3">Hasil Pencarian:</h3>
-            <div class="d-flex flex-wrap justify-content-center gap-3 mt-2" style="max-width: 80%; margin: auto;">
+            <h3 class="text-primary mt-4">Hasil Pencarian:</h3>
+            <div class="d-flex flex-wrap justify-content-center gap-4 mt-3" style="max-width: 80%; margin: auto;">
                 @foreach($results as $result)
-                    <div class="p-2 bg-warning text-dark rounded shadow-sm text-center" 
+                    <div class="p-4 bg-gradient text-dark rounded-lg shadow-lg text-center" 
                         style="min-width: 150px; max-width: 250px;">
                         {{ $result->name }}
                     </div>
@@ -27,104 +27,217 @@
     </div>
 </div>
 
-        @if ($lists->count() == 0)<!--$lists->count(): Fungsi ini digunakan untuk menghitung jumlah item dalam koleksi atau array yang ada pada variabel $lists. Di Laravel, jika $lists adalah koleksi (seperti Collection), maka metode count() digunakan untuk mendapatkan jumlah elemen dalam koleksi tersebut.
-            == 0: Mengecek apakah jumlah elemen dalam $lists sama dengan 0.-->
-            <div class="d-flex flex-column align-items-center"><!--Dengan d-flex, elemen anak akan disusun dalam suatu struktur fleksibel (baik secara horizontal atau vertikal, tergantung pada kelas tambahan yang diberikan).
-        flex-column: Kelas ini mengubah arah pengaturan elemen anak di dalam Flexbox menjadi vertikal (dari atas ke bawah).
-        align-items-center Ini akan membuat elemen-elemen anak di dalam div tersebut berada di tengah secara vertikal.-->
-                <p class="fw-bold text-center">Belum ada tugas yang ditambahkan</p><!-- <p class="fw-bold text-center">Belum ada tugas yang ditambahkan</p>
-                    <p>: Elemen ini digunakan untuk membuat paragraf. Dalam hal ini, digunakan untuk menampilkan teks yang berbunyi "Belum ada tugas yang ditambahkan."
-                    fw-bold: Kelas ini membuat teks di dalam elemen <p> menjadi tebal atau bold. fw adalah singkatan dari font-weight.
-                    text-center: Kelas ini digunakan untuk memusatkan teks secara horizontal di dalam elemen tersebut.-->
-                <button type="button" class="btn btn-sm d-flex align-items-center gap-2 btn-outline-primary"
-                    style="width: fit-content;"><!--btn-sm: Kelas ini digunakan untuk membuat tombol dengan ukuran kecil (small).
-                        style="width: fit-content;": Gaya inline ini memastikan bahwa lebar tombol akan menyesuaikan dengan kontennya. Jadi, tombol ini akan selebar teks atau elemen yang ada di dalamnya, tidak lebih lebar dari itu.-->
-                    <i class="bi bi-plus-square fs-3"></i> Tambah<!--<i>: Elemen <i> pada dasarnya adalah elemen untuk menampilkan ikon atau teks miring
-                        bi-plus-square: Kelas ini menunjukkan bahwa ikon yang digunakan adalah ikon plus dalam kotak (biasanya melambangkan aksi "Tambah" atau "Tambah item baru").fs-3 berarti ukuran font -->
-            </div>
-        @endif
-        <div class="d-flex gap-3 px-3 flex-nowrap overflow-x-scroll overflow-y-hidden" style="height: 100vh;">
-            @foreach ($lists as $list)
-                <div class="card flex-shrink-0 bg-light" style="width: 18rem; max-height: 50vh;">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                        <h4 class="card-title">{{ $list->name }}</h4>
-                        <form action="{{ route('lists.destroy', $list->id) }}" method="POST" style="display: inline;">
+<style>
+    body {
+        background: linear-gradient(135deg, #FFDEE9, #FFB6C1); /* Soft pink gradient */
+        color: #C2185B;
+        font-family: 'Roboto', sans-serif;
+    }
 
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm p-0">
-                                <i class="bi bi-trash fs-5 text-danger"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="card-body d-flex flex-column gap-2 overflow-x-hidden ">
-                        @foreach ($tasks as $task)
-                            @if ($task->list_id == $list->id)
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="d-flex flex-column justify-content-center gap-2">
-                                                <a href="{{route('tasks.show',$task->id)}}"
-                                                    class="fw-bold lh-1 m-0 {{ $task->is_completed ? 'text-decoration-line-through' : '' }}">
-                                                    {{ $task->name }}
-                                                </a>
-                                                <span class="badge text-bg-{{ $task->priorityClass }} badge-pill"
-                                                    style="width: fit-content">
-                                                    {{ $task->priority }}
-                                                </span>
-                                            </div>
-                                            <form action="{{ route('tasks.destroy', $task->id) }}" method="POST"
-                                                style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm p-0">
-                                                    <i class="bi bi-x-circle text-danger fs-5"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text text-truncate">
-                                            {{ $task->description }}
-                                        </p>
-                                    </div>
-                                    @if (!$task->is_completed)
-                                        <div class="card-footer">
-                                            <form action="{{ route('tasks.complete', $task->id) }}" method="POST">
-                                                @csrf
-                                                @method('PATCH')
-                                                <button type="submit" class="btn btn-sm btn-warning w-100">
-                                                    <span class="d-flex align-items-center justify-content-center">
-                                                        <i class="bi bi-check fs-5"></i>
-                                                        Selesai
-                                                    </span>
-                                                </button>
-                                            </form>
+    .card {
+        padding: 20px;
+        border-radius: 16px;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(45deg, #FFDEE9, #FFB6C1); /* Soft pink gradient */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-                                        </div>
-                                    @endif
-                                </div>
-                            @endif
-                        @endforeach
-                        <button type="button" class="btn btn-sm btn-outline-warningst->id }}" data-bs-toggle="modal" data-bs-target="#addTaskModal" data-list="{{$list->id}}">
-                            <span class="d-flex align-items-center justify-content-center">
-                                <i class="bi bi-plus fs-5"></i>
-                                Tambah 
-                            </span>
-                        </button>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
-                        <p class="card-text">{{ $list->tasks->count() }} Tugas</p>
-                    </div>
-                </div>
-            @endforeach
-            <button type="button" class="btn btn-outline-warning flex-shrink-0" style="width: 18rem; height: fit-content;"
-                data-bs-toggle="modal" data-bs-target="#addListModal">
-                <span class="d-flex align-items-center justify-content-center">
-                    <i class="bi bi-plus fs-5"></i>
-                    Tambah
-                </span>
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-body {
+        padding: 20px;
+        color: #C2185B;
+    }
+
+    .card-header {
+        padding: 15px;
+        background: #FFDEE9;
+        color: #C2185B;
+        font-weight: bold;
+        border-bottom: 2px solid #FF4081; /* Brighter pink */
+    }
+
+    .btn-outline-primary {
+        border-color: #FF92A8;
+        color: #FF4081;
+        transition: background 0.3s ease;
+    }
+
+    .btn-outline-primary:hover {
+        background: #F50057;
+        color: white;
+    }
+
+    .btn-primary {
+        background: #FF1493;
+        border: none;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background: #D81B60;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .badge {
+        border-radius: 25px;
+        padding: 8px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .badge.text-bg-high {
+        background: #FF6F61;
+    }
+
+    .badge.text-bg-medium {
+        background: #FF80AB;
+    }
+
+    .badge.text-bg-low {
+        background: #FF91A4;
+    }
+
+    /* Responsive for mobile screens */
+    @media (max-width: 768px) {
+        .d-flex {
+            flex-direction: column;
+        }
+
+        .card {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .card-header h4 {
+            font-size: 1.4rem;
+        }
+
+        .btn-primary, .btn-outline-primary {
+            width: 100%;
+        }
+    }
+
+    /* Modal Design */
+    .modal-content {
+        background: linear-gradient(135deg, #FFDEE9, #FFB6C1);
+        border-radius: 12px;
+    }
+
+    .modal-header {
+        background: #FF1493;
+        color: white;
+    }
+
+    .modal-footer .btn-primary {
+        background: #C2185B;
+        border: none;
+    }
+
+    .modal-footer .btn-primary:hover {
+        background: #D81B60;
+    }
+</style>
+
+<div id="content" class="overflow-y-hidden overflow-x-hidden">
+    @if ($lists->count() == 0)
+        <div class="d-flex flex-column align-items-center">
+            <p class="fw-bold text-center text-muted">Belum ada tugas yang ditambahkan</p>
+            <button type="button" class="btn btn-lg d-flex align-items-center gap-3 btn-outline-primary"
+                    style="width: fit-content;">
+                <i class="bi bi-plus-square fs-3"></i> Tambah
             </button>
         </div>
+    @endif
+
+    <div class="d-flex gap-4 px-3 flex-nowrap overflow-x-scroll overflow-y-hidden" style="height: 100vh;">
+        @foreach ($lists as $list)
+            <div class="card flex-shrink-0" style="width: 18rem; max-height: 80vh;">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h4 class="card-title">{{ $list->name }} 🌸</h4>
+                    <form action="{{ route('lists.destroy', $list->id) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm p-0">
+                            <i class="bi bi-trash fs-5 text-danger"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="card-body d-flex flex-column gap-3 overflow-x-hidden">
+                    @foreach ($tasks as $task)
+                        @if ($task->list_id == $list->id)
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex flex-column justify-content-center gap-2">
+                                            <a href="{{ route('tasks.show', $task->id) }}"
+                                               class="fw-bold lh-1 m-0 {{ $task->is_completed ? 'text-decoration-line-through' : '' }}">
+                                                {{ $task->name }}
+                                            </a>
+                                            <span class="badge text-bg-{{ $task->priorityClass }} badge-pill"
+                                                  style="width: fit-content">
+                                                {{ ucfirst($task->priority) }}
+                                            </span>
+                                        </div>
+                                        <form action="{{ route('tasks.destroy', $task->id) }}" method="POST"
+                                              style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm p-0">
+                                                <i class="bi bi-x-circle text-danger fs-5"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text text-truncate">
+                                        {{ $task->description }}
+                                    </p>
+                                </div>
+                                @if (!$task->is_completed)
+                                    <div class="card-footer">
+                                        <form action="{{ route('tasks.complete', $task->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn btn-sm btn-danger w-100">
+                                                <span class="d-flex align-items-center justify-content-center">
+                                                    <i class="bi bi-check fs-5"></i>
+                                                    Selesai
+                                                </span>
+                                            </button>
+                                        </form>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
+                    @endforeach
+                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                            data-bs-target="#addTaskModal" data-list="{{ $list->id }}">
+                        <span class="d-flex align-items-center justify-content-center">
+                            <i class="bi bi-plus fs-5"></i>
+                            Tambah
+                        </span>
+                    </button>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <p class="card-text">{{ $list->tasks->count() }} Tugas</p>
+                </div>
+            </div>
+        @endforeach
+
+        <button type="button" class="btn btn-outline-primary flex-shrink-0" style="width: 18rem; height: fit-content;"
+                data-bs-toggle="modal" data-bs-target="#addListModal">
+            <span class="d-flex align-items-center justify-content-center">
+                <i class="bi bi-plus fs-5"></i>
+                Tambah
+            </span>
+        </button>
     </div>
+</div>
 @endsection

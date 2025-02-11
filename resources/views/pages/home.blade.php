@@ -9,7 +9,7 @@
               class="d-flex align-items-center gap-2 p-3 bg-white rounded shadow">
             <input type="text" name="search" placeholder="Cari..." 
                    class="form-control border-primary" style="width: 300px;">
-            <button type="submit" class="btn btn-primary">Cari</button>
+            <button type="submit" class="btn btn-warning">Cari</button>
         </form>
 
         <!-- Tampilkan hasil pencarian jika ada -->
@@ -45,7 +45,7 @@
         @endif
         <div class="d-flex gap-3 px-3 flex-nowrap overflow-x-scroll overflow-y-hidden" style="height: 100vh;">
             @foreach ($lists as $list)
-                <div class="card flex-shrink-0" style="width: 18rem; max-height: 50vh;">
+                <div class="card flex-shrink-0 bg-light" style="width: 18rem; max-height: 50vh;">
                     <div class="card-header d-flex align-items-center justify-content-between">
                         <h4 class="card-title">{{ $list->name }}</h4>
                         <form action="{{ route('lists.destroy', $list->id) }}" method="POST" style="display: inline;">

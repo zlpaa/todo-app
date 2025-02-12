@@ -1,28 +1,29 @@
 <?php
 
-// app/Http/Controllers/HomeController.php
 namespace App\Http\Controllers;
 
-use App\Models\Item; // Model untuk data yang ingin dicari
+use App\Models\Task;
+use App\Models\TaskList;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        // Menampilkan halaman utama
-        return view('pages.home');
-    }
-
+    // Add the search() method here
     public function search(Request $request)
     {
-        // Mengambil input pencarian
-        $searchTerm = $request->input('search');
-        
-        // Menemukan data yang sesuai dengan pencarian
-        $results = Item::where('name', 'like', "%{$searchTerm}%")->get();
-        
-        // Mengirimkan hasil pencarian ke view
-        return view('home', compact('results'));
+        // Perform the search logic, for example:
+        $query = $request->input('search');
+
+        // Searching for tasks or lists that match the search term
+        $results = Task::where('name', 'like', '%' . $query . '%')->get();
+
+        // Return a view with the search results
+        return view('pages.home', ['results' => $results]);
+    }
+
+    // Other methods in your controller (index, etc.)
+    public function index()
+    {
+        return view('pages.home');
     }
 }

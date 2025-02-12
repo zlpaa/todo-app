@@ -13,6 +13,8 @@ Route::view('/tabel-warna', 'tabel-warna');
 
 // Membuat route untuk home
 Route::get('/', [TaskController::class, 'index'])->name('home');
+Route::get('/search', [HomeController::class, 'search'])->name('home.search');
+
 
 Route::resource('lists', TaskListController::class);
 

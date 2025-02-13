@@ -1,29 +1,37 @@
 <?php
 
+// Menentukan namespace untuk controller ini
 namespace App\Http\Controllers;
 
+// Mengimpor model Task dan TaskList yang diperlukan untuk pencarian
 use App\Models\Task;
 use App\Models\TaskList;
+// Mengimpor Request dari Laravel untuk menangani input dari user
 use Illuminate\Http\Request;
 
+// HomeController bertanggung jawab untuk menangani logika halaman utama
 class HomeController extends Controller
 {
-    // Add the search() method here
+    // Menambahkan metode search() yang bertugas untuk mencari data berdasarkan input pengguna
     public function search(Request $request)
     {
-        // Perform the search logic, for example:
+        // Mengambil input pencarian yang dikirimkan oleh pengguna dari parameter 'search'
         $query = $request->input('search');
 
-        // Searching for tasks or lists that match the search term
+        // Melakukan pencarian di model Task berdasarkan nama task yang mirip dengan query pencarian
+        // 'like' digunakan untuk mencocokkan pola nama task yang mengandung string pencarian
         $results = Task::where('name', 'like', '%' . $query . '%')->get();
 
-        // Return a view with the search results
+        // Mengembalikan hasil pencarian dan menampilkan hasil tersebut di view 'pages.home'
+        // Variabel 'results' yang berisi hasil pencarian akan diteruskan ke tampilan
         return view('pages.home', ['results' => $results]);
     }
 
-    // Other methods in your controller (index, etc.)
+    // Metode index untuk menampilkan halaman utama tanpa hasil pencarian
     public function index()
     {
+        // Menampilkan halaman home (dapat digunakan untuk menampilkan daftar task atau informasi lainnya)
         return view('pages.home');
     }
 }
+

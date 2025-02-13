@@ -4,3 +4,6 @@
         <a class="navbar-brand fw-bolder" href="#">{{ config('app.name') }}</a><!--<a class="navbar-brand fw-bolder" href="#"> digunakan untuk menampilkan nama aplikasi atau merek di bagian navigasi situs (navbar). Nama ini diambil dari pengaturan aplikasi (config('app.name')), dan tampil dengan gaya tebal (bold).-->
     </div>
 </nav>
+
+<div style="padding-top: 70px;"></div>
+

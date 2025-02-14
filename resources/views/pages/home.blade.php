@@ -205,7 +205,7 @@ button.btn {
 }
 </style>
 
-<div id="main" class="overflow-y-hidden overflow-x-hidden">
+<div id="content" class="overflow-y-hidden overflow-x-hidden">
     @if ($lists->count() == 0)
         <div class="d-flex flex-column align-items-center">
             <p class="text-center fst-italic">Belum ada tugas yang ditambahkan</p>
@@ -218,7 +218,7 @@ button.btn {
     <div class="row my-3">
         <div class="col-6 mx-auto">
             <form action="{{ route('home') }}" method="GET" class="d-flex gap-2">
-                <input type="text" class="form-control" name="query" placeholder="Cari tugas atau list..." value="{{ request()->query('query') }}">
+                <input type="text" class="form-control" name="query" placeholder="🔎Cari tugas atau list..." value="{{ request()->query('query') }}">
                 <button type="submit" class="btn btn-outline-danger">Cari</button>
             </form>
         </div>

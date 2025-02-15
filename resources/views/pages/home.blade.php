@@ -214,16 +214,6 @@ button.btn {
             </button>
         </div>
     @endif
-
-    <div class="row my-3">
-        <div class="col-6 mx-auto">
-            <form action="{{ route('home') }}" method="GET" class="d-flex gap-2">
-                <input type="text" class="form-control" name="query" placeholder="🔎Cari tugas atau list..." value="{{ request()->query('query') }}">
-                <button type="submit" class="btn btn-outline-danger">Cari</button>
-            </form>
-        </div>
-    </div>
-
     <div class="d-flex gap-3 px-3 flex-nowrap overflow-x-scroll overflow-y-hidden" style="height: 100vh;">
         @foreach ($lists as $list)
             <div class="card flex-shrink-0" style="width: 18rem; max-height: 80vh;">

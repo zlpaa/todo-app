@@ -95,4 +95,64 @@ class TaskController extends Controller
     // Fungsi untuk menghapus task
     public function destroy($id)
     {
-        // Mencari task berdasarkan ID dan menghapusny
+        // Mencari task berdasarkan ID dan menghapusnya
+        Task::findOrFail($id)->delete();
+
+        // Mengarahkan ke halaman home setelah task dihapus
+        return redirect()->route('home');
+    }
+
+    // Fungsi untuk menampilkan detail task berdasarkan ID
+    public function show($id)
+    {
+        // Menyiapkan data untuk detail task
+        $data = [
+            'title' => 'Task', // Judul halaman
+            'lists' => TaskList::all(), // Menyertakan semua task list
+            'task' => Task::findOrFail($id), // Menampilkan task berdasarkan ID
+        ];
+
+        // Mengirimkan data ke view 'pages.details'
+        return view('pages.details', $data);
+    }
+
+    // Fungsi untuk mengubah list dari task tertentu
+    public function changeList(Request $request, Task $task)
+    {
+        // Validasi inputan list_id
+        $request->validate([
+            'list_id' => 'required|exists:task_lists,id',
+        ]);
+
+        // Memperbarui task dengan list_id baru
+        Task::findOrFail($task->id)->update([
+            'list_id' => $request->list_id
+        ]);
+
+        // Mengarahkan kembali dengan pesan sukses
+        return redirect()->back()->with('success', 'List berhasil diperbarui!');
+    }
+
+    // Fungsi untuk memperbarui task (update)
+    public function update(Request $request, Task $task)
+    {
+        // Validasi inputan form
+        $request->validate([
+            'list_id' => 'required',
+            'name' => 'required|max:100',
+            'description' => 'max:255',
+            'priority' => 'required|in:low,medium,high' // Prioritas harus salah satu dari low, medium, atau high
+        ]);
+
+        // Memperbarui task dengan data yang baru
+        Task::findOrFail($task->id)->update([
+            'list_id' => $request->list_id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'priority' => $request->priority
+        ]);
+
+        // Mengarahkan kembali dengan pesan sukses
+        return redirect()->back()->with('success', 'Task berhasil diperbarui!');
+    }
+}

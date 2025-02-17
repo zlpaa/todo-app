@@ -214,6 +214,20 @@ button.btn {
             </button>
         </div>
     @endif
+    {{-- <div class="container mt-5">
+        <!-- User Profile Section -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-12 col-md-4 text-center">
+                <div class="card shadow-lg rounded-3">
+                    <div class="card-body">
+                        <img src="{{ asset('img/pot') }}" class="rounded-circle mb-3" alt="User Photo" style="width: 120px; height: 120px; object-fit: cover;">
+                        <h4 class="fw-bold text-pink">John Doe</h4>
+                        <p class="text-muted">Web Developer at XYZ</p>
+                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque urna eu augue.</p>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
     <div class="d-flex gap-3 px-3 flex-nowrap overflow-x-scroll overflow-y-hidden" style="height: 100vh;">
         @foreach ($lists as $list)
             <div class="card flex-shrink-0" style="width: 18rem; max-height: 80vh;">

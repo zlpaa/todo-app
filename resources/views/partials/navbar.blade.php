@@ -1,19 +1,28 @@
 {{-- Navbar --}}
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(45deg, #FFB6C1, #f10486, #FFB6C1); box-shadow: 0 4px 90px rgba(0, 0, 0, 0.1); z-index: 1000;">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(135deg, #ffb3b3, #d6a6cc, #f5e6f5); box-shadow: 0 8px 50px rgba(0, 0, 0, 0.1); z-index: 1000;">
     <div class="container d-flex justify-content-between align-items-center">
         <!-- Logo Aplikasi -->
-        <a class="navbar-brand fw-bolder" href="#home" style="font-size: 1.7rem; font-family: 'Arial', sans-serif; letter-spacing: 1px; transition: 0.3s ease-in-out;">
+        <a class="navbar-brand fw-bolder" href="#home" style="font-size: 1.8rem; font-family: 'Poppins', sans-serif; letter-spacing: 1px; transition: 0.3s ease-in-out;">
             {{ config('app.name') }} 🎉
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- Profil Pengguna -->
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- Avatar Profil -->
+                <img src="{{ asset ('img/poto-zalfa.jpeg')}}" alt="Profil" class="rounded-circle me-2" width="40" height="40">
+                <span class="fw-semibold">Zalfa</span>
+            </a>
+        </div>
+
         <!-- Form Pencarian -->
         <form action="{{ route('home') }}" method="GET" class="d-flex gap-3 align-items-center coquette-form">
             <input type="text" class="form-control coquette-input" name="query" id="searchQuery" placeholder="🔍 Cari tugas atau list..." value="{{ request()->query('query') }}">
-            <button type="submit" class="btn btn-coquette">Cari 📋</button>
-            <button type="button" class="btn btn-secondary" id="clearSearch">Clear 🧹</button>
+            <button type="submit" class="btn btn-coquette">Cari</button>
+            <button type="button" class="btn btn-secondary" id="clearSearch">Clear</button>
         </form>
 
         <script>
@@ -30,68 +39,71 @@
     <!-- Konten Anda di sini -->
 </div>
 
-{{-- Add custom CSS for hover effects --}}
+{{-- Custom CSS untuk tampilan lebih estetik --}}
 <style>
     /* Styling for the entire search form */
     .coquette-form {
-        background-color: #f9f3f3; /* Soft pastel background */
-        border-radius: 20px; /* Rounded corners for a softer look */
-        padding: 15px 25px; /* Adequate padding for balance */
-        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-        transition: all 0.3s ease-in-out; /* Smooth transition on hover */
+        background-color: #ffffff;
+        border-radius: 30px;
+        padding: 15px 25px;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease-in-out;
     }
 
     .coquette-form:hover {
-        transform: translateY(-5px); /* Lift effect on hover */
-        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
     }
 
     /* Styling for input field */
     .coquette-input {
-        border: 2px solid #ff6f61; /* Bright border for input */
-        border-radius: 10px; /* Rounded corners */
-        padding: 12px 18px; /* Spacious padding */
-        transition: border-color 0.3s ease-in-out; /* Smooth border color change on focus */
-        margin-right: 10px; /* Small gap between input and button */
+        border: 2px solid #d4a0f7;
+        border-radius: 15px;
+        padding: 12px 18px;
+        transition: border-color 0.3s ease-in-out;
+        margin-right: 10px;
+        font-family: 'Poppins', sans-serif;
     }
 
     .coquette-input:focus {
-        border-color: #ff3b30; /* Darker border color on focus */
-        outline: none; /* Remove default outline */
+        border-color: #9b72b5;
+        outline: none;
     }
 
     /* Styling for search button */
     .btn-coquette {
-        background-color: #ff61e5; /* Soft pink background */
+        background-color: #d4a0f7;
         color: white;
-        border-radius: 25px; /* Rounded button */
-        padding: 10px 20px; /* Adequate padding */
+        border-radius: 30px;
+        padding: 12px 25px;
         font-weight: bold;
-        transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+        transition: background-color 0.3s ease-in-out;
+        font-family: 'Poppins', sans-serif;
     }
 
     .btn-coquette:hover {
-        background-color: #ff3b30; /* Darker pink on hover */
-        transform: translateY(-3px); /* Slight lift effect */
+        background-color: #9b72b5;
+        transform: translateY(-2px);
     }
 
     /* Styling for the 'Clear' button */
     .btn-secondary {
-        background-color: #f1f1f1; /* Light grey background */
-        color: #333; /* Dark grey text */
-        border-radius: 25px;
-        padding: 10px 20px;
+        background-color: #f9f9f9;
+        color: #777;
+        border-radius: 30px;
+        padding: 12px 25px;
+        font-family: 'Poppins', sans-serif;
         transition: background-color 0.3s ease-in-out;
     }
 
     .btn-secondary:hover {
-        background-color: #ddd; /* Slightly darker grey on hover */
+        background-color: #e6e6e6;
     }
 
     /* Hover effects for navbar brand */
     .navbar-brand:hover {
-        color: #ff1044;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        color: #9b72b5;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
     }
 
     /* Mobile navbar tweak */
@@ -99,11 +111,13 @@
         .navbar-nav {
             text-align: center;
         }
+
         .coquette-form {
-            padding: 10px 15px; /* Reduced padding for small screens */
+            padding: 12px 20px;
         }
+
         .coquette-input {
-            max-width: 200px; /* Limit input width on mobile */
+            max-width: 200px;
         }
     }
 

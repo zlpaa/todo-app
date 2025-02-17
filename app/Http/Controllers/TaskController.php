@@ -8,71 +8,73 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    // Fungsi untuk menampilkan daftar task dan list task
+    // Menampilkan daftar tasks dan task lists, bisa dengan pencarian jika ada query
     public function index(Request $request)
     {
-        $query = $request->input('query'); // Menerima input pencarian dari pengguna
+        // Mengambil input pencarian (query) dari permintaan
+        $query = $request->input('query');
 
         // Jika ada query pencarian
         if ($query) {
-            // Mencari task yang nama atau deskripsinya cocok dengan query
+            // Mencari task berdasarkan nama atau deskripsi yang mengandung query
             $tasks = Task::where('name', 'like', "%{$query}%")
                 ->orWhere('description', 'like', "%{$query}%")
                 ->latest() // Mengurutkan berdasarkan yang terbaru
                 ->get();
 
-            // Mencari list task yang nama atau tasks-nya cocok dengan query
+            // Mencari task lists berdasarkan nama atau yang memiliki task yang mengandung query
             $lists = TaskList::where('name', 'like', "%{$query}%")
                 ->orWhereHas('tasks', function ($q) use ($query) {
-                    // Mencari task yang terkait dengan list task yang nama atau deskripsinya cocok dengan query
+                    // Pencarian tasks yang ada dalam task list yang mengandung query
                     $q->where('name', 'like', "%{$query}%")
                         ->orWhere('description', 'like', "%{$query}%");
                 })
-                ->with('tasks') // Menyertakan tasks terkait
+                ->with('tasks') // Memuat hubungan tasks dengan task list
                 ->get();
 
-            // Jika tidak ada task yang ditemukan, tampilkan semua tasks dalam list
+            // Jika tidak ada task yang ditemukan, muat semua task dari task list
             if ($tasks->isEmpty()) {
                 $lists->load('tasks');
             } else {
-                // Jika ada task, hanya tampilkan task yang sesuai dengan query
+                // Jika ada task yang ditemukan, filter tasks dalam list sesuai query
                 $lists->load(['tasks' => function ($q) use ($query) {
                     $q->where('name', 'like', "%{$query}%")
                         ->orWhere('description', 'like', "%{$query}%");
                 }]);
             }
         } else {
-            // Jika tidak ada query, tampilkan semua task dan list task
+            // Jika tidak ada query, tampilkan semua task dan task list
             $tasks = Task::latest()->get();
             $lists = TaskList::with('tasks')->get();
         }
 
-        // Menyusun data untuk dikirim ke view
+        // Menyediakan data untuk view, termasuk daftar tasks, lists, dan prioritas
         $data = [
-            'title' => 'Home', // Judul halaman
-            'lists' => $lists, // Daftar list task
-            'tasks' => $tasks, // Daftar task
-            'priorities' => Task::PRIORITIES // Daftar prioritas task
+            'title' => 'Home',
+            'lists' => $lists,
+            'tasks' => $tasks,
+            'priorities' => Task::PRIORITIES // Menyediakan pilihan prioritas task
         ];
 
-        // Mengirimkan data ke view 'pages.home'
-        return view('pages.home', $data);
+        return view('pages.home', $data); // Mengembalikan view dengan data
     }
 
-    // Fungsi untuk menyimpan task baru
+    // Menyimpan task baru
     public function store(Request $request)
     {
-        // Validasi inputan dari form
+        // Validasi input untuk memastikan data yang dikirimkan sesuai
         $request->validate([
-            'name' => 'required|max:100',
-            'description' => 'max:255',
-            'list_id' => 'required'
+            'name' => 'required|max:100', // Nama task wajib diisi dan maksimal 100 karakter
+            'description' => 'max:255', // Deskripsi task maksimal 255 karakter
+            'priority' => 'required', // Prioritas harus diisi
+            'list_id' => 'required' // List ID harus diisi
         ]);
 
-        // Membuat task baru
+        // Membuat task baru berdasarkan input yang diberikan
         Task::create([
             'name' => $request->name,
             'description' => $request->description,
+            'priority' => $request->priority,
             'list_id' => $request->list_id
         ]);
 
@@ -80,10 +82,10 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
-    // Fungsi untuk menandai task sebagai selesai
+    // Menandai task sebagai selesai
     public function complete($id)
     {
-        // Mencari task berdasarkan ID dan memperbarui statusnya menjadi selesai
+        // Mencari task berdasarkan ID dan mengubah status 'is_completed' menjadi true
         Task::findOrFail($id)->update([
             'is_completed' => true
         ]);
@@ -92,34 +94,34 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
-    // Fungsi untuk menghapus task
+    // Menghapus task berdasarkan ID
     public function destroy($id)
     {
         // Mencari task berdasarkan ID dan menghapusnya
         Task::findOrFail($id)->delete();
 
-        // Mengarahkan ke halaman home setelah task dihapus
+        // Mengarahkan ke route 'home' setelah task dihapus
         return redirect()->route('home');
     }
 
-    // Fungsi untuk menampilkan detail task berdasarkan ID
+    // Menampilkan detail task berdasarkan ID
     public function show($id)
     {
-        // Menyiapkan data untuk detail task
+        // Mengambil data task dan task lists untuk ditampilkan
         $data = [
             'title' => 'Task', // Judul halaman
-            'lists' => TaskList::all(), // Menyertakan semua task list
-            'task' => Task::findOrFail($id), // Menampilkan task berdasarkan ID
+            'lists' => TaskList::all(), // Daftar task lists
+            'task' => Task::findOrFail($id), // Task yang sesuai dengan ID
         ];
 
-        // Mengirimkan data ke view 'pages.details'
+        // Mengembalikan tampilan detail task dengan data yang sudah disiapkan
         return view('pages.details', $data);
     }
 
-    // Fungsi untuk mengubah list dari task tertentu
+    // Mengubah task ke task list yang baru
     public function changeList(Request $request, Task $task)
     {
-        // Validasi inputan list_id
+        // Validasi agar list_id yang diberikan valid dan ada di task_lists
         $request->validate([
             'list_id' => 'required|exists:task_lists,id',
         ]);
@@ -133,18 +135,18 @@ class TaskController extends Controller
         return redirect()->back()->with('success', 'List berhasil diperbarui!');
     }
 
-    // Fungsi untuk memperbarui task (update)
+    // Memperbarui task yang sudah ada
     public function update(Request $request, Task $task)
     {
-        // Validasi inputan form
+        // Validasi input untuk task yang akan diperbarui
         $request->validate([
-            'list_id' => 'required',
-            'name' => 'required|max:100',
-            'description' => 'max:255',
-            'priority' => 'required|in:low,medium,high' // Prioritas harus salah satu dari low, medium, atau high
+            'list_id' => 'required', // List ID wajib diisi
+            'name' => 'required|max:100', // Nama task wajib diisi dan maksimal 100 karakter
+            'description' => 'max:255', // Deskripsi task maksimal 255 karakter
+            'priority' => 'required|in:low,medium,high' // Prioritas harus ada dan hanya bisa low, medium, atau high
         ]);
 
-        // Memperbarui task dengan data yang baru
+        // Memperbarui task berdasarkan data yang diberikan
         Task::findOrFail($task->id)->update([
             'list_id' => $request->list_id,
             'name' => $request->name,

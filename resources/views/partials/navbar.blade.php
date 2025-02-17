@@ -1,6 +1,45 @@
 {{-- Navbar --}}
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(135deg, #ffb3b3, #d6a6cc, #f5e6f5); box-shadow: 0 8px 50px rgba(0, 0, 0, 0.1); z-index: 1000;">
     <div class="container d-flex justify-content-between align-items-center">
+        
+        <!-- Profil Pengguna -->
+<div class="dropdown">
+    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <!-- Avatar Profil -->
+        <img src="{{ asset('img/poto-zalfa.jpeg') }}" alt="Profil" class="rounded-circle me-2 avatar-image" width="60" height="60"> <!-- Gambar lebih besar -->
+        <span class="fw-semibold">Zalfa</span>
+    </a>
+</div>
+
+<!-- Custom CSS untuk Ukuran Gambar dan Animasi -->
+<style>
+    /* Menambahkan animasi dan efek hover pada gambar avatar */
+    .avatar-image {
+        transition: transform 0.3s ease, opacity 0.3s ease-in-out;
+        width: 60px; /* Ukuran gambar lebih besar */
+        height: 60px; /* Ukuran gambar lebih besar */
+    }
+
+    /* Efek Hover untuk memperbesar gambar */
+    .avatar-image:hover {
+        transform: scale(1.5); /* Perbesar gambar saat hover */
+        opacity: 0.8; /* Ubah opacity untuk efek */
+    }
+
+    /* Animasi Fade-In saat gambar dimuat */
+    .avatar-image {
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
         <!-- Logo Aplikasi -->
         <a class="navbar-brand fw-bolder" href="#home" style="font-size: 1.8rem; font-family: 'Poppins', sans-serif; letter-spacing: 1px; transition: 0.3s ease-in-out;">
             {{ config('app.name') }} 🎉
@@ -8,16 +47,6 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <!-- Profil Pengguna -->
-        <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <!-- Avatar Profil -->
-                <img src="{{ asset ('img/poto-zalfa.jpeg')}}" alt="Profil" class="rounded-circle me-2" width="40" height="40">
-                <span class="fw-semibold">Zalfa</span>
-            </a>
-        </div>
-
         <!-- Form Pencarian -->
         <form action="{{ route('home') }}" method="GET" class="d-flex gap-3 align-items-center coquette-form">
             <input type="text" class="form-control coquette-input" name="query" id="searchQuery" placeholder="🔍 Cari tugas atau list..." value="{{ request()->query('query') }}">

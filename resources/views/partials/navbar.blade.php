@@ -6,7 +6,7 @@
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <!-- Avatar Profil -->
                 <img src="{{ asset('img/zalfa-hanifa.jpeg') }}" alt="Profil" class="rounded-circle me-2 avatar-image" width="60" height="60">
-                <span class="fw-semibold">Zalfa</span>
+                <span class="fw-semibold">Zalfa</span>❤
             </a>
         </div>
 

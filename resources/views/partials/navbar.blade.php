@@ -35,7 +35,11 @@
         <i class="bi bi-github fs-4 text-coquette"></i>
         <a href="https://www.tiktok.com/@sukaici?_t=ZS-8u0Zl5dKwNe&_r=1" class="text-decoration-none me-2" target="_blank">
             <i class="bi bi-tiktok fs-4 text-coquette"></i>
-        </a>     
+        </a>
+           {{-- link mengarah ke instagram --}}
+    <a href="https://www.instagram.com/theyluv.yci?igsh=MTkxczd4OHY0eGQ3ZQ%3D%3D&utm_source=qr" class="text-decoration-none" target="_blank">
+        <i class="bi bi-instagram fs-4 text-coquette"></i>
+    </a>
         <script>
             document.getElementById('clearSearch').addEventListener('click', function () 
                 document.getElementById('searchQuery').value = ''; // Kosongkan input

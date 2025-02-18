@@ -30,7 +30,7 @@
                             <i class="bi bi-pencil-square"></i>
                         </button>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-dark"> <!-- Menambahkan kelas text-dark untuk teks hitam -->
                         <p>
                             {{ $task->description }}
                         </p>
@@ -53,7 +53,7 @@
                     <div class="card-header bg-light text-dark">
                         <h3 class="fw-bold fs-4 text-truncate mb-0" style="width: 80%">Details</h3>
                     </div>
-                    <div class="card-body d-flex flex-column gap-3">
+                    <div class="card-body d-flex flex-column gap-3 text-black"> <!-- Menambahkan kelas text-dark untuk teks hitam -->
                         <form action="{{ route('tasks.changeList', $task->id) }}" method="POST">
                             @csrf
                             @method('PATCH')
@@ -85,7 +85,7 @@
             <form action="{{ route('tasks.update', $task->id) }}" method="POST" class="modal-content bg-gradient-pink rounded-3">
                 @method('PUT')
                 @csrf
-                <div class="modal-header bg-pink text-white rounded-top-3">
+                <div class="modal-header text-dark"> <!-- Menambahkan kelas text-dark untuk teks hitam -->
                     <h1 class="modal-title fs-5" id="editTaskModalLabel">Edit Task</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

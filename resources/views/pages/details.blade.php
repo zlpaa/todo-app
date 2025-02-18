@@ -85,9 +85,10 @@
             <form action="{{ route('tasks.update', $task->id) }}" method="POST" class="modal-content bg-gradient-pink rounded-3">
                 @method('PUT')
                 @csrf
-                <div class="modal-header text-dark"> <!-- Menambahkan kelas text-dark untuk teks hitam -->
+                <div class="modal-header text-dark">
                     <h1 class="modal-title fs-5" id="editTaskModalLabel">Edit Task</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!-- Close button with black icon -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="filter: invert(0) !important;"></button>
                 </div>
                 <div class="modal-body">
                     <input type="text" value="{{ $task->list_id }}" name="list_id" hidden>

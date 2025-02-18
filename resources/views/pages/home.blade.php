@@ -266,6 +266,8 @@
                    </span>
                </button>
            @endif
+           <div class="social-icons mt-3">
+        </div>
        </div>
    </div>
 @endsection

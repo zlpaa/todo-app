@@ -1,12 +1,11 @@
 {{-- Navbar --}}
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background: linear-gradient(135deg, #ffb3b3, #d6a6cc, #f5e6f5); box-shadow: 0 8px 50px rgba(0, 0, 0, 0.1); z-index: 1000;">
     <div class="container d-flex justify-content-between align-items-center">
-        
         <!-- Profil Pengguna -->
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <!-- Avatar Profil -->
-                <img src="{{ asset('img/poto-zalfa.jpeg') }}" alt="Profil" class="rounded-circle me-2 avatar-image" width="60" height="60">
+                <img src="{{ asset('img/zalfa-hanifa.jpeg') }}" alt="Profil" class="rounded-circle me-2 avatar-image" width="60" height="60">
                 <span class="fw-semibold">Zalfa</span>
             </a>
         </div>
@@ -27,12 +26,17 @@
             <button type="submit" class="btn btn-coquette">Cari</button>
             <button type="button" class="btn btn-secondary" id="clearSearch">Clear</button>
         </form>
-
+  <!-- Link yang mengarah ke GitHub -->
+  <a href="https://github.com/zlpaa/todo-app/" class="text-decoration-none me-2" target="_blank">
+    {{--  Menentukan URL tujuan, dalam hal ini GitHub.
+    text-decoration-none → Menghapus underline bawaan dari tautan.
+    me-2 → Menambahkan margin-end (jarak ke kanan) sebesar 2 (Bootstrap spacing). --}}
+        <!-- Ikon GitHub menggunakan Bootstrap Icons -->
         <script>
-            document.getElementById('clearSearch').addEventListener('click', function () {
+            document.getElementById('clearSearch').addEventListener('click', function () 
                 document.getElementById('searchQuery').value = ''; // Kosongkan input
                 window.location.href = "{{ route('home') }}"; // Redirect ke halaman awal
-            });
+        );
         </script>
     </div>
 </nav>

@@ -20,7 +20,7 @@
             <!-- Task Card -->
             <div class="col-8">
                 <div class="card shadow-lg border-0 rounded-3">
-                    <div class="card-header d-flex align-items-center justify-content-between bg-pink text-white">
+                    <div class="card-header d-flex align-items-center justify-content-between bg-pink text-black">
                         <h3 class="fw-bold fs-4 text-truncate mb-0" style="width: 80%">
                             {{ $task->name }}
                             <span class="fs-6 fw-medium">di {{ $task->list->name }}</span>

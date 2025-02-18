@@ -3,50 +3,24 @@
     <div class="container d-flex justify-content-between align-items-center">
         
         <!-- Profil Pengguna -->
-<div class="dropdown">
-    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-        <!-- Avatar Profil -->
-        <img src="{{ asset('img/poto-zalfa.jpeg') }}" alt="Profil" class="rounded-circle me-2 avatar-image" width="60" height="60"> <!-- Gambar lebih besar -->
-        <span class="fw-semibold">Zalfa</span>
-    </a>
-</div>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <!-- Avatar Profil -->
+                <img src="{{ asset('img/poto-zalfa.jpeg') }}" alt="Profil" class="rounded-circle me-2 avatar-image" width="60" height="60">
+                <span class="fw-semibold">Zalfa</span>
+            </a>
+        </div>
 
-<!-- Custom CSS untuk Ukuran Gambar dan Animasi -->
-<style>
-    /* Menambahkan animasi dan efek hover pada gambar avatar */
-    .avatar-image {
-        transition: transform 0.3s ease, opacity 0.3s ease-in-out;
-        width: 60px; /* Ukuran gambar lebih besar */
-        height: 60px; /* Ukuran gambar lebih besar */
-    }
-
-    /* Efek Hover untuk memperbesar gambar */
-    .avatar-image:hover {
-        transform: scale(1.5); /* Perbesar gambar saat hover */
-        opacity: 0.8; /* Ubah opacity untuk efek */
-    }
-
-    /* Animasi Fade-In saat gambar dimuat */
-    .avatar-image {
-        animation: fadeIn 1s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-</style>
         <!-- Logo Aplikasi -->
         <a class="navbar-brand fw-bolder" href="#home" style="font-size: 1.8rem; font-family: 'Poppins', sans-serif; letter-spacing: 1px; transition: 0.3s ease-in-out;">
             {{ config('app.name') }} 🎉
         </a>
+
+        <!-- Toggler untuk tampilan mobile -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <!-- Form Pencarian -->
         <form action="{{ route('home') }}" method="GET" class="d-flex gap-3 align-items-center coquette-form">
             <input type="text" class="form-control coquette-input" name="query" id="searchQuery" placeholder="🔍 Cari tugas atau list..." value="{{ request()->query('query') }}">
@@ -64,13 +38,13 @@
 </nav>
 
 {{-- Konten setelah navbar dengan padding-top --}}
-<div style="padding-top: 90px;"> <!-- Menambah padding-top untuk memberi ruang agar konten tidak tertutup navbar -->
+<div style="padding-top: 90px;">
     <!-- Konten Anda di sini -->
 </div>
 
 {{-- Custom CSS untuk tampilan lebih estetik --}}
 <style>
-    /* Styling for the entire search form */
+    /* Styling untuk form pencarian */
     .coquette-form {
         background-color: #ffffff;
         border-radius: 30px;
@@ -84,7 +58,7 @@
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
     }
 
-    /* Styling for input field */
+    /* Styling untuk input pencarian */
     .coquette-input {
         border: 2px solid #d4a0f7;
         border-radius: 15px;
@@ -99,7 +73,7 @@
         outline: none;
     }
 
-    /* Styling for search button */
+    /* Styling untuk tombol pencarian */
     .btn-coquette {
         background-color: #d4a0f7;
         color: white;
@@ -115,7 +89,7 @@
         transform: translateY(-2px);
     }
 
-    /* Styling for the 'Clear' button */
+    /* Styling untuk tombol 'Clear' */
     .btn-secondary {
         background-color: #f9f9f9;
         color: #777;
@@ -129,13 +103,39 @@
         background-color: #e6e6e6;
     }
 
-    /* Hover effects for navbar brand */
+    /* Hover effects untuk navbar brand */
     .navbar-brand:hover {
         color: #9b72b5;
         text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
     }
 
-    /* Mobile navbar tweak */
+    /* Efek hover pada avatar gambar */
+    .avatar-image {
+        transition: transform 0.3s ease, opacity 0.3s ease-in-out;
+        width: 60px; /* Ukuran gambar avatar */
+        height: 60px; /* Ukuran gambar avatar */
+    }
+
+    .avatar-image:hover {
+        transform: scale(1.5); /* Perbesar gambar saat hover */
+        opacity: 0.8; /* Ubah opacity untuk efek */
+    }
+
+    /* Animasi Fade-In untuk avatar gambar */
+    .avatar-image {
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    /* Responsivitas untuk tampilan mobile */
     @media (max-width: 767px) {
         .navbar-nav {
             text-align: center;
@@ -148,18 +148,16 @@
         .coquette-input {
             max-width: 200px;
         }
-    }
 
-    /* Subtle hover effect for navbar items */
-    .navbar-nav .nav-item:hover {
-        transform: scale(1.05);
-        transition: all 0.3s ease-in-out;
-    }
-
-    /* Adding spacing for padding-top on mobile */
-    @media (max-width: 767px) {
+        /* Menambah padding-top di container untuk mobile */
         .container {
             padding-top: 20px;
         }
+    }
+
+    /* Efek hover pada navbar item */
+    .navbar-nav .nav-item:hover {
+        transform: scale(1.05);
+        transition: all 0.3s ease-in-out;
     }
 </style>

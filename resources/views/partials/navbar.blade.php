@@ -32,6 +32,10 @@
     text-decoration-none → Menghapus underline bawaan dari tautan.
     me-2 → Menambahkan margin-end (jarak ke kanan) sebesar 2 (Bootstrap spacing). --}}
         <!-- Ikon GitHub menggunakan Bootstrap Icons -->
+        <i class="bi bi-github fs-4 text-coquette"></i>
+        <a href="https://www.tiktok.com/@sukaici?_t=ZS-8u0Zl5dKwNe&_r=1" class="text-decoration-none me-2" target="_blank">
+            <i class="bi bi-tiktok fs-4 text-coquette"></i>
+        </a>     
         <script>
             document.getElementById('clearSearch').addEventListener('click', function () 
                 document.getElementById('searchQuery').value = ''; // Kosongkan input

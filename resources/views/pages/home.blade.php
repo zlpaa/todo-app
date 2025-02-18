@@ -6,7 +6,7 @@
    <h3 class="text-success mt-5 text-center">Hasil Pencarian:</h3>
    <div class="d-flex flex-wrap justify-content-center gap-3 mt-3" style="max-width: 80%; margin: auto;">
        @foreach($results as $result)
-           <div class="p-4 bg-gradient-to-r from-pink-500 to-orange-400 text-dark rounded-lg shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out text-center">
+           <div class="p-4 bg-gradient-to-r from-pink-500 to-orange-400 text-dark rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out text-center">
                {{ $result->name }}
            </div>
        @endforeach
@@ -15,9 +15,9 @@
 
    <style>
        body {
-           background: linear-gradient(135deg, #FFDEE9, #FFB6C1); /* Soft pink gradient */
+           background: linear-gradient(135deg, #FFC0CB, #FFB6C1); /* Soft pink gradient */
            color: #C2185B;
-           font-family: 'Roboto', sans-serif;
+           font-family: 'Poppins', sans-serif;
            margin: 0;
            padding: 0;
            height: 100vh;
@@ -25,7 +25,7 @@
            justify-content: center;
            align-items: flex-start;
            animation: fadeIn 1s ease-in-out;
-           margin-top: 100px; /* Increased margin-top for more space between navbar and content */
+           margin-top: 100px;
        }
 
        @keyframes fadeIn {
@@ -35,22 +35,19 @@
 
        .card {
            padding: 20px;
-           border-radius: 15px;
-           border: none;
+           border-radius: 12px;
+           background: #fff;
            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
            transition: transform 0.3s ease, box-shadow 0.3s ease;
-           background: #FFFFFF;
            margin-bottom: 20px;
            display: flex;
            flex-direction: column;
            transform: scale(1);
-           position: relative;
-           overflow: hidden;
        }
 
        .card:hover {
            transform: scale(1.05);
-           box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
        }
 
        .card-body {
@@ -66,6 +63,7 @@
            font-weight: bold;
            border-bottom: 2px solid #FF4081;
            position: relative;
+           border-radius: 12px 12px 0 0;
        }
 
        .card-footer {
@@ -74,20 +72,21 @@
            padding: 10px;
            display: flex;
            justify-content: center;
+           border-radius: 0 0 12px 12px;
        }
 
        .card-footer button {
            border-radius: 50px;
            padding: 10px 20px;
-           transition: background 0.3s ease;
-           background: #FF1493;
-           border: none;
+           background: linear-gradient(135deg, #FF1493, #F50057);
            color: white;
            cursor: pointer;
+           transition: background 0.3s ease;
+           border: none;
        }
 
        .card-footer button:hover {
-           background: #F50057;
+           background: linear-gradient(135deg, #FF4081, #FF92A8);
        }
 
        .btn-outline-primary {
@@ -139,10 +138,6 @@
            box-shadow: 0 0 10px rgba(255, 20, 147, 0.3);
        }
 
-       button.btn {
-           border-radius: 30px;
-       }
-
        .modal-content {
            background: linear-gradient(135deg, #FFDEE9, #FFB6C1);
            border-radius: 15px;
@@ -173,6 +168,10 @@
        .card-header i {
            margin-left: 10px;
            animation: pulse 1.5s infinite;
+       }
+
+       .btn-rounded {
+           border-radius: 50px;
        }
    </style>
 
@@ -266,8 +265,6 @@
                    </span>
                </button>
            @endif
-           <div class="social-icons mt-3">
-        </div>
        </div>
    </div>
 @endsection

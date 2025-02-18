@@ -25,7 +25,7 @@
                             {{ $task->name }}
                             <span class="fs-6 fw-medium">di {{ $task->list->name }}</span>
                         </h3>
-                        <button type="button" class="btn btn-sm btn-outline-light" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-sm btn-outline-dark" data-bs-toggle="modal"
                             data-bs-target="#editTaskModal">
                             <i class="bi bi-pencil-square"></i>
                         </button>
